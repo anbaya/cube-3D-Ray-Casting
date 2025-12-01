@@ -111,6 +111,25 @@ void draw_line(t_player *player, t_cube *game, float start_x, int i)
     
 }
 
+void draw_floor_and_ceiling(t_cube *game)
+{
+    for (int y = 0; y < HIGHT / 2; y++)
+    {
+        for (int x = 0; x < WIDTH; x++)
+        {
+            put_pixel(x, y, CELLING_COLOR, game);
+        }
+    }
+    for (int y = HIGHT / 2; y < HIGHT; y++)
+    {
+        for (int x = 0; x < WIDTH; x++)
+        {
+            put_pixel(x, y, FLOOR_COLOR, game);
+        }
+    }
+}
+
+
 int draw_loop(t_cube *game)
 {
     t_player *player = &game->player;
@@ -121,6 +140,7 @@ int draw_loop(t_cube *game)
     float fraction = PI / 3 / WIDTH;
     float start_x = player->angle - (PI / 6);
     int i = 0;
+    draw_floor_and_ceiling(game);
     while (i < WIDTH)
     {
         draw_line(player, game, start_x, i);

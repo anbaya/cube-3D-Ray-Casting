@@ -16,79 +16,38 @@ void init_player(t_player *player)
 int key_press(int keycode, t_player *player)
 {
     if (keycode == W)
-    {
         player->key_up = true;
-        printf("Key W pressed\n");
-    }
     if (keycode == S)
-    {
         player->key_down = true;
-        printf("Key S pressed\n");
-    }
     if (keycode == A)
-    {
         player->key_left = true;
-        printf("Key A pressed\n");
-    }
     if (keycode == D)
-    {
         player->key_right = true;
-        printf("Key D pressed\n");
-    }
+
     if (keycode == LEFT) // Left arrow key
-    {
         player->turn_left = true;
-        printf("Left arrow key pressed\n");
-    }
+
     if (keycode == RIGHT) // Right arrow key
-    {
         player->turn_right = true;
-        printf("Right arrow key pressed\n");
-    }
-    if (keycode == ESC) // Escape key
-    {
-        printf("Escape key pressed, exiting...\n");
-    }
     return 0;
 }
 
 int key_release(int keycode, t_player *player)
 {
     if (keycode == W)
-    {
         player->key_up = false;
-        printf("Key W released\n");
-    }
     if (keycode == S)
-    {
         player->key_down = false;
-        printf("Key S released\n");
-    }
     if (keycode == A)
-    {
         player->key_left = false;
-        printf("Key A released\n");
-    }
     if (keycode == D)
-    {
         player->key_right = false;
-        printf("Key D released\n");
-    }
-    if (keycode == LEFT) // Left arrow key
-    {
+    if (keycode == LEFT)
         player->turn_left = false;
-        printf("Left arrow key released\n");
-    }
-    if (keycode == RIGHT) // Right arrow key
-    {
+    if (keycode == RIGHT)
         player->turn_right = false;
-        printf("Right arrow key released\n");
-    }
-    if (keycode == ESC) // Escape key
-    {
-        printf("Escape key released, exiting...\n");
+    if (keycode == ESC)
         exit(0);
-    }
     return 0;
 }
 

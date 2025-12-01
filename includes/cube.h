@@ -3,6 +3,8 @@
 # define WIDTH 960
 # define HIGHT 640
 # define BLOCK_SIZE 64
+# define CELLING_COLOR 0x87CEEB
+# define FLOOR_COLOR 0x228B22
 
 # define A 97
 # define S 115
