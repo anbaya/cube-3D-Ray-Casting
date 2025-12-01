@@ -1,7 +1,7 @@
 #pragma once
 
-# define WIDTH 1280
-# define HIGHT 720
+# define WIDTH 960
+# define HIGHT 640
 # define BLOCK_SIZE 64
 
 # define A 97
@@ -51,7 +51,7 @@ typedef struct cube
 void init_player(t_player *player);
 int key_press(int keycode, t_player *player);
 int key_release(int keycode, t_player *player);
-void move_player(t_player *player);
+void move_player(t_player *player, t_cube *game);
 int init_game(t_cube *game);
 int draw_loop(t_cube *game);
 void put_pixel(int x, int y, int color, t_cube *game);

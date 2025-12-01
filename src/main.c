@@ -20,9 +20,9 @@ char **get_map(void)
     map[2] = "100000000000001";
     map[3] = "100000100000001";
     map[4] = "100000000000001";
-    map[5] = "100000010000001";
+    map[5] = "100000000000001";
     map[6] = "100001000000001";
-    map[7] = "100000000000001";
+    map[7] = "100000001100001";
     map[8] = "100000000000001";
     map[9] = "111111111111111";
     map[10] = NULL;
@@ -72,7 +72,22 @@ bool touch(float px, float py, t_cube *game)
     return false;
 }
 
-void draw_line(t_player *player, t_cube *game, float start_x)
+float distance(float dx, float dy)
+{
+    return sqrt(dx * dx + dy * dy);
+}
+
+float fixed_dist(float x1, float y1, float x2, float y2, t_cube *game)
+{
+    float delta_x = x2 - x1;
+    float delta_y = y2 - y1;
+    float angle = atan2(delta_y, delta_x) - game->player.angle;
+    float fix_dist = distance(delta_x, delta_y) * cos(angle);
+    return fix_dist;
+}
+
+
+void draw_line(t_player *player, t_cube *game, float start_x, int i)
 {
     float cos_angle = cos(start_x);
     float sin_angle = sin(start_x);
@@ -80,10 +95,20 @@ void draw_line(t_player *player, t_cube *game, float start_x)
     float ray_y = player->y;
     while (!touch(ray_x, ray_y, game))
     {
-        put_pixel(ray_x, ray_y, 0xFF0000, game);
+        // put_pixel(ray_x, ray_y, 0xFF0000, game);
         ray_x += cos_angle;
         ray_y += sin_angle;
     }
+    float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
+    float height = (BLOCK_SIZE / dist) * (WIDTH / 2);
+    int start_y = (HIGHT - height) / 2;
+    int end = start_y + height;
+    while(start_y < end)
+    {
+        put_pixel(i, start_y, 255, game);
+        start_y++;
+    }
+    
 }
 
 int draw_loop(t_cube *game)
@@ -92,15 +117,13 @@ int draw_loop(t_cube *game)
     mlx_destroy_image(game->mlx, game->img);
     game->img = mlx_new_image(game->mlx, WIDTH, HIGHT);
     game->img_start = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
-    move_player(player);
-    draw_square(player->x, player->y, 10, 0x00FF00, game);
-    draw_map(game);
+    move_player(player, game);
     float fraction = PI / 3 / WIDTH;
     float start_x = player->angle - (PI / 6);
     int i = 0;
     while (i < WIDTH)
     {
-        draw_line(player, game, start_x);
+        draw_line(player, game, start_x, i);
         start_x += fraction;
         i++;
     }

@@ -92,10 +92,10 @@ int key_release(int keycode, t_player *player)
     return 0;
 }
 
-void move_player(t_player *player)
+void move_player(t_player *player, t_cube *game)
 {
     int speed = 1;
-    float angle_speed = 0.03;
+    float angle_speed = 0.01;
     float cos_angle = cos(player->angle);
     float sin_angle = sin(player->angle);
 
@@ -110,22 +110,42 @@ void move_player(t_player *player)
 
     if (player->key_up)
     {
-        player->x += cos_angle * speed;
-        player->y += sin_angle * speed;
+        if (player->x + cos_angle * speed > BLOCK_SIZE && player->x + cos_angle * speed < WIDTH - BLOCK_SIZE &&
+            player->y + sin_angle * speed > BLOCK_SIZE && player->y + sin_angle * speed < HIGHT - BLOCK_SIZE &&
+           game->map[(int)(player->y + sin_angle * speed) / BLOCK_SIZE][(int)(player->x + cos_angle * speed) / BLOCK_SIZE] != '1')
+        {
+            player->x += cos_angle * speed;
+            player->y += sin_angle * speed;
+        }
     }
     if (player->key_down)
     {
-        player->x -= cos_angle * speed;
-        player->y -= sin_angle * speed;
+        if (player->x - cos_angle * speed > BLOCK_SIZE && player->x - cos_angle * speed < WIDTH - BLOCK_SIZE &&
+            player->y - sin_angle * speed > BLOCK_SIZE && player->y - sin_angle * speed < HIGHT - BLOCK_SIZE &&
+           game->map[(int)(player->y - sin_angle * speed) / BLOCK_SIZE][(int)(player->x - cos_angle * speed) / BLOCK_SIZE] != '1')
+        {
+            player->x -= cos_angle * speed;
+            player->y -= sin_angle * speed;
+        }
     }
     if (player->key_left)
     {
-        player->x += sin_angle * speed;
-        player->y -= cos_angle * speed;
+        if (player->x + sin_angle * speed > BLOCK_SIZE && player->x + sin_angle * speed < WIDTH - BLOCK_SIZE &&
+            player->y - cos_angle * speed > BLOCK_SIZE && player->y - cos_angle * speed < HIGHT - BLOCK_SIZE &&
+           game->map[(int)(player->y - cos_angle * speed) / BLOCK_SIZE][(int)(player->x + sin_angle * speed) / BLOCK_SIZE] != '1')
+        {
+            player->x += sin_angle * speed;
+            player->y -= cos_angle * speed;
+        }
     }
     if (player->key_right)
     {
-        player->x -= sin_angle * speed;
-        player->y += cos_angle * speed;
+        if (player->x - sin_angle * speed > BLOCK_SIZE && player->x - sin_angle * speed < WIDTH - BLOCK_SIZE &&
+            player->y + cos_angle * speed > BLOCK_SIZE && player->y + cos_angle * speed < HIGHT - BLOCK_SIZE &&
+           game->map[(int)(player->y + cos_angle * speed) / BLOCK_SIZE][(int)(player->x - sin_angle * speed) / BLOCK_SIZE] != '1')
+        {
+            player->x -= sin_angle * speed;
+            player->y += cos_angle * speed;
+        }
     }
 }
