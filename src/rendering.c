@@ -6,7 +6,7 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:37 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:21:43 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 14:53:12 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_line(t_player *player, t_cube *game, float start_x, int i)
 	ray.angle = start_x;
 	cast_ray(player, &ray, game);
 	dist = fixed_dist(player, &ray, game);
-	height = (BLOCK_SIZE / dist) * (WIDTH / 2);
+	height = (game->block_size / dist) * (WIDTH / 2);
 	draw_wall_column(game, &ray, height, i);
 }
 
@@ -51,10 +51,10 @@ int	get_color(t_cube *game, t_ray *ray, float line_height, float pixel_pos)
 		wall_x = ray->x; // For horizontal walls, use X position
 	else
 		wall_x = ray->y; // For vertical walls, use Y position
-	wall_x = fmod(wall_x, (float)BLOCK_SIZE);
+	wall_x = fmod(wall_x, (float)game->block_size);
 	if (wall_x < 0)
-		wall_x += BLOCK_SIZE;
-	tex_x = (int)(wall_x * texture->width / BLOCK_SIZE);
+		wall_x += game->block_size;
+	tex_x = (int)(wall_x * texture->width / game->block_size);
 	if (tex_x >= texture->width)
 		tex_x = texture->width - 1;
 	tex_y = (int)(pixel_pos * texture->height / line_height);

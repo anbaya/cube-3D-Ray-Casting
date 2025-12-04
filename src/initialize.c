@@ -6,11 +6,30 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:15 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:45:07 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 15:08:29 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
+
+int	compute_block_size(int win_w, int win_h, int map_w, int map_h)
+{
+	int	block_w;
+	int	block_h;
+	int	block_size;
+
+	if (map_w <= 0 || map_h <= 0 || win_w <= 0 || win_h <= 0)
+		return (1);
+	block_w = win_w / map_w;
+	block_h = win_h / map_h;
+	if (block_w < block_h)
+		block_size = block_w;
+	else
+		block_size = block_h;
+	if (block_size < 1)
+		block_size = 1;
+	return (block_size);
+}
 
 char	**get_map(void)
 {
@@ -84,6 +103,8 @@ int	draw_loop(t_cube *game)
 
 int	init_game(t_cube *game)
 {
+	game->block_size = compute_block_size(WIDTH, HIGHT, MAP_NUM_COLS,
+			MAP_NUM_ROWS);
 	init_player(&game->player);
 	game->map = get_map();
 	game->mlx = mlx_init();

@@ -6,7 +6,7 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:29 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:32:31 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 14:51:59 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ bool	is_valid_position(float x, float y, t_cube *game)
 	int	grid_x;
 	int	grid_y;
 
-	grid_x = (int)(x) / BLOCK_SIZE;
-	grid_y = (int)(y) / BLOCK_SIZE;
-	if (!(x > BLOCK_SIZE && x < WIDTH - BLOCK_SIZE
-			&& y > BLOCK_SIZE && y < HIGHT - BLOCK_SIZE))
+	grid_x = (int)(x) / game->block_size;
+	grid_y = (int)(y) / game->block_size;
+	if (!(x > game->block_size && x < WIDTH - game->block_size
+			&& y > game->block_size && y < HIGHT - game->block_size))
 		return (false);
 	if (game->map[grid_y][grid_x] == '1')
 		return (false);

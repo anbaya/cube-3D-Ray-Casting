@@ -6,24 +6,24 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:32 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:39:57 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 14:52:53 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
 void	determine_wall_side(t_position *current, t_position *prev,
-		t_wall_side *wall_side)
+		t_wall_side *wall_side, t_cube *game)
 {
 	int	x;
 	int	y;
 	int	prev_grid_x;
 	int	prev_grid_y;
 
-	x = current->x / BLOCK_SIZE;
-	y = current->y / BLOCK_SIZE;
-	prev_grid_x = prev->x / BLOCK_SIZE;
-	prev_grid_y = prev->y / BLOCK_SIZE;
+	x = current->x / game->block_size;
+	y = current->y / game->block_size;
+	prev_grid_x = prev->x / game->block_size;
+	prev_grid_y = prev->y / game->block_size;
 	if (prev_grid_x != x && current->x < prev->x)
 		*wall_side = EAST;
 	else if (prev_grid_x != x && current->x > prev->x)
@@ -39,8 +39,8 @@ bool	touch(float px, float py, t_cube *game, t_wall_side *wall_side)
 	int	x;
 	int	y;
 
-	x = px / BLOCK_SIZE;
-	y = py / BLOCK_SIZE;
+	x = px / game->block_size;
+	y = py / game->block_size;
 	if (game->map[y][x] == '1')
 	{
 		return (true);
@@ -84,7 +84,7 @@ void	cast_ray(t_player *player, t_ray *ray, t_cube *game)
 		{
 			current.x = ray->x;
 			current.y = ray->y;
-			determine_wall_side(&current, &prev, &ray->wall_side);
+			determine_wall_side(&current, &prev, &ray->wall_side, game);
 			break ;
 		}
 	}

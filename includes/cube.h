@@ -6,7 +6,7 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:07 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:45:07 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 15:02:31 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 #define WIDTH 960
 #define HIGHT 640
-#define BLOCK_SIZE 64 //TODO: adjust block size if needed
+#define MAP_NUM_ROWS 10
+#define MAP_NUM_COLS 14
 #define CELLING_COLOR 0x87CEEB
 #define FLOOR_COLOR 0x228B22
 
@@ -73,6 +74,7 @@ typedef struct player
 
 typedef struct cube
 {
+    int			block_size;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -123,7 +125,7 @@ void			init_textures(t_cube *game);
 void			cast_ray(t_player *player, t_ray *ray, t_cube *game);
 bool			touch(float px, float py, t_cube *game, t_wall_side *wall_side);
 void			determine_wall_side(t_position *current, t_position *prev,
-					t_wall_side *wall_side);
+					t_wall_side *wall_side, t_cube *game);
 float			distance(float dx, float dy);
 float			fixed_dist(t_player *player, t_ray *ray, t_cube *game);
 
