@@ -6,7 +6,7 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:07 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 13:30:07 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 14:45:07 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 
 #define PI 3.1415926535
 
-#define no_texture "./textures/no_wall.xpm"
-#define so_texture "./textures/so_wall.xpm"
-#define ea_texture "./textures/ea_wall.xpm"
-#define we_texture "./textures/we_wall.xpm"
+#define NO_TEXTURE "./textures/no_wall.xpm"
+#define SO_TEXTURE "./textures/so_wall.xpm"
+#define EA_TEXTURE "./textures/ea_wall.xpm"
+#define WE_TEXTURE "./textures/we_wall.xpm"
 
 #include "math.h"
 #include "minilibx-linux/mlx.h"
