@@ -6,11 +6,11 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:18 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:34:28 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 15:24:32 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 int	key_press(int keycode, t_player *player)
 {

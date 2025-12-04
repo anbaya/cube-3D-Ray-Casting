@@ -6,11 +6,11 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:32 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:52:53 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 17:37:34 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 void	determine_wall_side(t_position *current, t_position *prev,
 		t_wall_side *wall_side, t_cube *game)

@@ -1,16 +1,19 @@
 NAME = Cube3D
-cc = cc
+CC = cc
 OBJ = $(SRC:.c=.o)
+LIBFT = includes/libft/libft.a
 
 LFLAGS = -L./includes/minilibx-linux -lmlx -lXext -lX11 -lm -lz
 INCLUDES = includes/minilibx-linux/libmlx.a
-SRC = src/main.c src/player.c src/movements.c src/key_hooks.c src/positions.c \
-		src/initialize.c src/rendering.c src/raycasting.c
+SRC = src/ghraphics/cube.c src/ghraphics/player.c src/ghraphics/movements.c src/ghraphics/key_hooks.c src/ghraphics/positions.c \
+		src/ghraphics/initialize.c src/ghraphics/rendering.c src/ghraphics/raycasting.c src/parsing/main.c src/parsing/bridge.c \
+		src/parsing/first_parsing.c src/parsing/get_next_line.c src/parsing/memoryCleaner.c src/parsing/reading.c src/parsing/tools_1.c \
+		src/parsing/tools_2.c src/parsing/tools_3.c src/parsing/tools_4.c src/parsing/tools_5.c
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(cc) -g $(SRC) -o $(NAME) $(INCLUDES) $(LFLAGS)
+	$(CC) -g $(SRC) -o $(NAME) $(LIBFT) $(INCLUDES) $(LFLAGS)
 clean:
 	rm -rf $(OBJ)
 fclean:

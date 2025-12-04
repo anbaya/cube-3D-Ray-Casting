@@ -6,11 +6,11 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:37 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 14:53:12 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 17:57:22 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
 
 void	put_pixel(int x, int y, int color, t_cube *game)
 {
@@ -92,7 +92,7 @@ void	draw_floor_and_ceiling(t_cube *game)
 		x = 0;
 		while (x < WIDTH)
 		{
-			put_pixel(x, y, CELLING_COLOR, game);
+			put_pixel(x, y, game->ceiling_color, game);
 			x++;
 		}
 		y++;
@@ -103,7 +103,7 @@ void	draw_floor_and_ceiling(t_cube *game)
 		x = 0;
 		while (x < WIDTH)
 		{
-			put_pixel(x, y, FLOOR_COLOR, game);
+			put_pixel(x, y, game->floor_color, game);
 			x++;
 		}
 		y++;

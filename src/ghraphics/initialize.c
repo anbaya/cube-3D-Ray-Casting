@@ -6,11 +6,16 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:15 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 15:08:29 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 17:57:22 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube.h"
+#include "../../includes/cube.h"
+
+int	rgb_to_int(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
+}
 
 int	compute_block_size(int win_w, int win_h, int map_w, int map_h)
 {
@@ -31,34 +36,15 @@ int	compute_block_size(int win_w, int win_h, int map_w, int map_h)
 	return (block_size);
 }
 
-char	**get_map(void)
+void	init_textures(t_cube *game, t_textures *txt)
 {
-	char	**map;
-
-	map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100000000000001";
-	map[2] = "100000000000001";
-	map[3] = "100000100000001";
-	map[4] = "100000000000001";
-	map[5] = "100000000000001";
-	map[6] = "100001000000001";
-	map[7] = "100000001100001";
-	map[8] = "100000000000001";
-	map[9] = "111111111111111";
-	map[10] = NULL;
-	return (map);
-}
-
-void	init_textures(t_cube *game)
-{
-	game->textures[NORTH].img = mlx_xpm_file_to_image(game->mlx, NO_TEXTURE,
+	game->textures[NORTH].img = mlx_xpm_file_to_image(game->mlx, txt->no,
 			&game->textures[NORTH].width, &game->textures[NORTH].height);
-	game->textures[SOUTH].img = mlx_xpm_file_to_image(game->mlx, SO_TEXTURE,
+	game->textures[SOUTH].img = mlx_xpm_file_to_image(game->mlx, txt->so,
 			&game->textures[SOUTH].width, &game->textures[SOUTH].height);
-	game->textures[EAST].img = mlx_xpm_file_to_image(game->mlx, EA_TEXTURE,
+	game->textures[EAST].img = mlx_xpm_file_to_image(game->mlx, txt->ea,
 			&game->textures[EAST].width, &game->textures[EAST].height);
-	game->textures[WEST].img = mlx_xpm_file_to_image(game->mlx, WE_TEXTURE,
+	game->textures[WEST].img = mlx_xpm_file_to_image(game->mlx, txt->we,
 			&game->textures[WEST].width, &game->textures[WEST].height);
 	game->textures[NORTH].data = mlx_get_data_addr(game->textures[NORTH].img,
 			&game->textures[NORTH].bpp, &game->textures[NORTH].size_line,
@@ -74,45 +60,52 @@ void	init_textures(t_cube *game)
 			&game->textures[WEST].endian);
 }
 
-int	draw_loop(t_cube *game)
+int	draw_loop(t_data *data)
 {
 	t_player	*player;
 	float		fraction;
 	float		start_x;
 	int			i;
 
-	player = &game->player;
-	mlx_destroy_image(game->mlx, game->img);
-	game->img = mlx_new_image(game->mlx, WIDTH, HIGHT);
-	game->img_start = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	move_player(player, game);
+	player = &data->game.player;
+	mlx_destroy_image(data->game.mlx, data->game.img);
+	data->game.img = mlx_new_image(data->game.mlx, WIDTH, HIGHT);
+	data->game.img_start = mlx_get_data_addr(data->game.img, &data->game.bpp, &data->game.size_line,
+			&data->game.endian);
+	move_player(player, &data->game, data);
 	fraction = PI / 3 / WIDTH;
 	start_x = player->angle - (PI / 6);
 	i = 0;
-	draw_floor_and_ceiling(game);
+	draw_floor_and_ceiling(&data->game);
 	while (i < WIDTH)
 	{
-		draw_line(player, game, start_x, i);
+		draw_line(player, &data->game, start_x, i);
 		start_x += fraction;
 		i++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	mlx_put_image_to_window(data->game.mlx, data->game.win, data->game.img, 0, 0);
 	return (0);
 }
 
-int	init_game(t_cube *game)
+int	init_game(t_data *data, char **map)
 {
-	game->block_size = compute_block_size(WIDTH, HIGHT, MAP_NUM_COLS,
+	t_player	*player;
+
+	data->game.block_size = compute_block_size(WIDTH, HIGHT, MAP_NUM_COLS,
 			MAP_NUM_ROWS);
-	init_player(&game->player);
-	game->map = get_map();
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HIGHT, "cube");
-	game->img = mlx_new_image(game->mlx, WIDTH, HIGHT);
-	init_textures(game);
-	game->img_start = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	init_player(&data->game.player, data);
+	data->game.map = map;
+	data->game.floor_color = rgb_to_int(data->colors->floor[0],
+			data->colors->floor[1], data->colors->floor[2]);
+	data->game.ceiling_color = rgb_to_int(data->colors->ceiling[0],
+			data->colors->ceiling[1], data->colors->ceiling[2]);
+	data->game.mlx = mlx_init();
+	data->game.win = mlx_new_window(data->game.mlx, WIDTH, HIGHT, "cube");
+	data->game.img = mlx_new_image(data->game.mlx, WIDTH, HIGHT);
+	init_textures(&data->game, data->textures);
+	data->game.img_start = mlx_get_data_addr(data->game.img, &data->game.bpp,
+			&data->game.size_line, &data->game.endian);
+	mlx_put_image_to_window(data->game.mlx, data->game.win,
+		data->game.img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:07 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 15:02:31 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/04 17:57:22 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@
 #define EA_TEXTURE "./textures/ea_wall.xpm"
 #define WE_TEXTURE "./textures/we_wall.xpm"
 
-#include "math.h"
+#include <math.h>
 #include "minilibx-linux/mlx.h"
-#include "stdbool.h"
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "../src/parsing/cube.h"
+
 
 typedef enum e_wall_side
 {
@@ -85,6 +87,8 @@ typedef struct cube
 	int			size_line;
 	int			endian;
 	t_texture	textures[4];
+	int			floor_color;
+	int			ceiling_color;
 }				t_cube;
 
 typedef struct s_ray
@@ -101,14 +105,24 @@ typedef struct s_position
 	float		y;
 }				t_position;
 
+typedef struct s_data
+{
+    t_cube  game;
+    t_colors    *colors;
+    t_textures  *textures;
+    t_player    *player;
+    p_player    *layer;
+}			t_data;
+
+
 // Player functions
-void			init_player(t_player *player);
-void			move_player(t_player *player, t_cube *game);
+void			init_player(t_player *player, t_data *data);
+void			move_player(t_player *player, t_cube *game, t_data *data);
 void			key_up(t_player *player, t_cube *game);
 void			key_down(t_player *player, t_cube *game);
 void			key_left(t_player *player, t_cube *game);
 void			key_right(t_player *player, t_cube *game);
-float			fix_angle(t_player *player);
+float			fix_angle(t_player *player, p_player *layer);
 bool			is_valid_position(float x, float y, t_cube *game);
 
 // Key hooks
@@ -116,10 +130,11 @@ int				key_press(int keycode, t_player *player);
 int				key_release(int keycode, t_player *player);
 
 // Game initialization and loop
-int				init_game(t_cube *game);
-int				draw_loop(t_cube *game);
+int				init_game(t_data *data, char **map);
+int				rgb_to_int(int r, int g, int b);
+int				draw_loop(t_data *data);
 char			**get_map(void);
-void			init_textures(t_cube *game);
+void			init_textures(t_cube *game, t_textures *txt);
 
 // Raycasting
 void			cast_ray(t_player *player, t_ray *ray, t_cube *game);
