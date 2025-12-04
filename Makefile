@@ -4,7 +4,8 @@ OBJ = $(SRC:.c=.o)
 
 LFLAGS = -L./includes/minilibx-linux -lmlx -lXext -lX11 -lm -lz
 INCLUDES = includes/minilibx-linux/libmlx.a
-SRC = src/main.c src/player.c
+SRC = src/main.c src/player.c src/movements.c src/key_hooks.c src/positions.c \
+		src/initialize.c src/rendering.c src/raycasting.c
 
 all: $(NAME)
 
