@@ -13,12 +13,6 @@
 #include "../parsing/cube.h"
 #include "../../includes/cube.h"
 
-void	free_textures(t_textures *textures)
-{
-	// Texture paths are owned by config, don't free them here
-	// They will be freed in free_config
-}
-
 void	free_map(char **map)
 {
 	int	i;
@@ -57,6 +51,22 @@ void	free_cube(t_cube *cube)
 	}
 }
 
+void	free_config_tow(t_config *config)
+{
+	if (config->textures)
+		free(config->textures);
+	if (config->colors)
+		free(config->colors);
+	if (config->player)
+		free(config->player);
+	if (config->mlx)
+	{
+		mlx_destroy_display(config->mlx);
+		free(config->mlx);
+	}
+	free(config);
+}
+
 void	free_config(t_config *config)
 {
 	if (config->file)
@@ -73,21 +83,7 @@ void	free_config(t_config *config)
 		free(config->we_path);
 	if (config->ea_path)
 		free(config->ea_path);
-	if (config->textures)
-	{
-		free_textures(config->textures);
-		free(config->textures);
-	}
-	if (config->colors)
-		free(config->colors);
-	if (config->player)
-		free(config->player);
-	if (config->mlx)
-	{
-		mlx_destroy_display(config->mlx);
-		free(config->mlx);
-	}
-	free(config);
+	free_config_tow(config);
 }
 
 void	free_data(t_data *data)

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "cube.h"
 
 void	freedom(char **new_sv, char **tmp)
 {
@@ -84,17 +85,8 @@ char	*get_next_line(int fd)
 	static char	*sv;
 	ssize_t		reader_return;
 
-	if (fd < 0)
-	{
-		if (sv)
-			free(sv);
-		return (sv = NULL, NULL);
-	}
-	if (!sv)
-	{
-		sv = malloc(1);
-		sv[0] = '\0';
-	}
+	if (init_and_cleanup(fd, &sv) == -1)
+		return (NULL);
 	while (1)
 	{
 		if (ft_strchr(sv, '\n'))
@@ -110,6 +102,5 @@ char	*get_next_line(int fd)
 			break ;
 		}
 	}
-	free(sv);
-	return (sv = NULL, NULL);
+	return (free(sv), sv = NULL, NULL);
 }

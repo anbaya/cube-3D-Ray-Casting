@@ -42,70 +42,51 @@ int	is_color(char *line)
 	return (0);
 }
 
-char	*c_reader(char *line, int i)
+static int	process_digit(char *line, int *i, char *num, int *j)
 {
-	int		j;
-	int		comma_count;
-	char	num[15];
+	while (line[*i] && (line[*i] >= '0' && line[*i] <= '9') && *j < 14)
+		num[(*j)++] = line[(*i)++];
+	if (line[*i] != ',' && line[*i] != '\0'
+		&& line[*i] != '\n' && line[*i] != ' ' && line[*i] != '\t')
+		return (0);
+	return (1);
+}
 
-	ft_strlcpy(num, "", 15);
+static int	process_comma(char *line, int *i, char *num, int *j)
+{
+	int	*comma_count;
+
+	comma_count = (int *)((char *)j + sizeof(int));
+	if (*comma_count >= 2)
+		return (0);
+	num[(*j)++] = ',';
+	(*comma_count)++;
+	(*i)++;
+	return (1);
+}
+
+int	parse_color_values(char *line, int i, char *num, int *comma_count)
+{
+	int	j;
+
 	j = 0;
-	comma_count = 0;
 	while (line[i])
 	{
-		while (line[i] && (line[i] >= '0' && line[i] <= '9') && j < 14)
-			num[j++] = line[i++];
-		if (line[i] != ',' && line[i] != '\0' && line[i] != '\n' && line[i] != ' ' && line[i] != '\t')
-			return (NULL);
+		if (!process_digit(line, &i, num, &j))
+			return (0);
 		if (line[i] == '\n' || line[i] == '\0')
 			break ;
 		skip_space(line, &i);
 		if (line[i] == ',')
 		{
-			if (comma_count >= 2)
-				return (NULL);
+			if (*comma_count >= 2)
+				return (0);
 			num[j++] = ',';
-			comma_count++;
+			(*comma_count)++;
 			i++;
 		}
 		skip_space(line, &i);
 	}
 	num[j] = '\0';
-	if (comma_count != 2)
-		return (NULL);
-	return (ft_strdup(num));
-}
-
-char	*read_color(char *line)
-{
-	int	i;
-
-	i = 0;
-	skip_space(line, &i);
-	if (!(line[i] >= '0' && line[i] <= '9'))
-		return (NULL);
-	return (c_reader(line, i));
-}
-
-void	color_select(t_config *config, char *line, int *rgb, int index)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && (line[i] != 'F' && line[i] != 'C'))
-		i++;
-	if (line[i] == 'F')
-	{
-		config->f_rgb[0] = rgb[0];
-		config->f_rgb[1] = rgb[1];
-		config->f_rgb[2] = rgb[2];
-		config->f_i = index;
-	}
-	else if (line[i] == 'C')
-	{
-		config->c_rgb[0] = rgb[0];
-		config->c_rgb[1] = rgb[1];
-		config->c_rgb[2] = rgb[2];
-		config->c_i = index;
-	}
+	return (1);
 }

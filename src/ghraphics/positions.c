@@ -24,7 +24,7 @@ bool	is_valid_position(float x, float y, t_cube *game)
 	return (true);
 }
 
-float	fix_angle(t_player *player, p_player *layer)
+float	fix_angle(t_player *player, t_layer *layer)
 {
 	float	angle_speed;
 

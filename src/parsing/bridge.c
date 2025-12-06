@@ -42,11 +42,11 @@ t_colors	*bridge_colors(t_config *config)
 	return (colors);
 }
 
-p_player	*bridge_player(t_config *config)
+t_layer	*bridge_player(t_config *config)
 {
-	p_player	*player;
+	t_layer	*player;
 
-	player = (p_player *)malloc(sizeof(p_player));
+	player = (t_layer *)malloc(sizeof(t_layer));
 	if (!player)
 		return (NULL);
 	player->y = config->p_y;

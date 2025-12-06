@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	t_config	*config;
 	t_textures	*textures;
 	t_colors	*colors;
-	p_player	*player;
+	t_layer		*player;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Error\nInvalid number of arguments\n", 2), 1);
@@ -44,20 +44,11 @@ int	main(int argc, char **argv)
 	if (!config)
 		return (ft_putstr_fd("Error\nInvalid File\n", 2), 1);
 	if (!get_player(config, config->map))
-	{
-		ft_putstr_fd("Error\nNo player found\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("Error\nNo player found\n", 2), 1);
 	if (map_parsing(config, config->p_x, config->p_y))
-	{
-		ft_putstr_fd("Error\nInvalid map\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("Error\nInvalid map\n", 2), 1);
 	if (map_char_check(config->map))
-	{
-		ft_putstr_fd("Error\nInvalid map characters\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("Error\nInvalid map characters\n", 2), 1);
 	config->textures = bridge_textures(config);
 	config->colors = bridge_colors(config);
 	config->player = bridge_player(config);

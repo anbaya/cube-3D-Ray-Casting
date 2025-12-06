@@ -30,13 +30,12 @@
 #define EA_TEXTURE "./textures/ea_wall.xpm"
 #define WE_TEXTURE "./textures/we_wall.xpm"
 
-#include <math.h>
+#include "../src/parsing/cube.h"
 #include "minilibx-linux/mlx.h"
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../src/parsing/cube.h"
-
 
 typedef enum e_wall_side
 {
@@ -72,7 +71,7 @@ typedef struct player
 
 typedef struct cube
 {
-    int			block_size;
+	int			block_size;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -103,17 +102,16 @@ typedef struct s_position
 
 typedef struct s_data
 {
-    t_cube  game;
-    t_colors    *colors;
-    t_textures  *textures;
-    t_player    *player;
-    p_player    *layer;
+	t_cube		game;
+	t_colors	*colors;
+	t_textures	*textures;
+	t_player	*player;
+	t_layer		*layer;
 	t_config	*config;
-}			t_data;
-
+}				t_data;
 
 // Main game function
-int cube(t_config *config);
+int				cube(t_config *config);
 
 // Player functions
 void			init_player(t_player *player, t_data *data);
@@ -122,7 +120,7 @@ void			key_up(t_player *player, t_cube *game);
 void			key_down(t_player *player, t_cube *game);
 void			key_left(t_player *player, t_cube *game);
 void			key_right(t_player *player, t_cube *game);
-float			fix_angle(t_player *player, p_player *layer);
+float			fix_angle(t_player *player, t_layer *layer);
 bool			is_valid_position(float x, float y, t_cube *game);
 
 // Key hooks

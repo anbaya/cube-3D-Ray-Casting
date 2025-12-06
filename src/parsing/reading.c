@@ -63,8 +63,7 @@ char	**read_file(char *filename)
 	}
 	file[i] = NULL;
 	get_next_line(-1);
-	close(fd);
-	return (file);
+	return (close(fd), file);
 }
 
 int	load_textures(char **file, t_config *config)
