@@ -45,26 +45,34 @@ int	is_color(char *line)
 char	*c_reader(char *line, int i)
 {
 	int		j;
-	char	num[12];
+	int		comma_count;
+	char	num[15];
 
-	ft_strlcpy(num, "000,000,000", 12);
+	ft_strlcpy(num, "", 15);
 	j = 0;
+	comma_count = 0;
 	while (line[i])
 	{
-		while (line[i] && (line[i] >= '0' && line[i] <= '9') && j < 11)
+		while (line[i] && (line[i] >= '0' && line[i] <= '9') && j < 14)
 			num[j++] = line[i++];
-		if (line[i] != ',' && line[i] != '\0' && j != 8 && line[i] != '\n')
-			return (0);
-		if (line[i] == '\n')
-			break ;
-		if (j < 8)
-			num[j++] = ',';
-		if (line[i] == ',' && line[i + 1] != ',')
-			i++;
-		else
+		if (line[i] != ',' && line[i] != '\0' && line[i] != '\n' && line[i] != ' ' && line[i] != '\t')
 			return (NULL);
+		if (line[i] == '\n' || line[i] == '\0')
+			break ;
+		skip_space(line, &i);
+		if (line[i] == ',')
+		{
+			if (comma_count >= 2)
+				return (NULL);
+			num[j++] = ',';
+			comma_count++;
+			i++;
+		}
 		skip_space(line, &i);
 	}
+	num[j] = '\0';
+	if (comma_count != 2)
+		return (NULL);
 	return (ft_strdup(num));
 }
 
