@@ -31,7 +31,7 @@
 #define WE_TEXTURE "./textures/we_wall.xpm"
 
 #include "../src/parsing/cube.h"
-#include "minilibx-linux/mlx.h"
+#include "minilibx/mlx.h"
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
