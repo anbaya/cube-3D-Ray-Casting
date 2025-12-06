@@ -70,7 +70,8 @@ int	draw_loop(t_data *data)
 	player = &data->game.player;
 	mlx_destroy_image(data->game.mlx, data->game.img);
 	data->game.img = mlx_new_image(data->game.mlx, WIDTH, HIGHT);
-	data->game.img_start = mlx_get_data_addr(data->game.img, &data->game.bpp, &data->game.size_line,
+	data->game.img_start = mlx_get_data_addr(data->game.img,
+			&data->game.bpp, &data->game.size_line,
 			&data->game.endian);
 	move_player(player, &data->game, data);
 	fraction = PI / 3 / WIDTH;
@@ -83,7 +84,8 @@ int	draw_loop(t_data *data)
 		start_x += fraction;
 		i++;
 	}
-	mlx_put_image_to_window(data->game.mlx, data->game.win, data->game.img, 0, 0);
+	mlx_put_image_to_window(data->game.mlx,
+		data->game.win, data->game.img, 0, 0);
 	return (0);
 }
 

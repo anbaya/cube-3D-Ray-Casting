@@ -12,6 +12,16 @@
 
 #include "../../includes/cube.h"
 
+void	init_keys(t_player *player)
+{
+	player->key_down = false;
+	player->key_up = false;
+	player->key_left = false;
+	player->key_right = false;
+	player->turn_left = false;
+	player->turn_right = false;
+}
+
 void	init_player(t_player *player, t_data *data)
 {
 	if (!data->layer)
@@ -24,12 +34,7 @@ void	init_player(t_player *player, t_data *data)
 		player->x = data->layer->x * data->game.block_size;
 		player->y = data->layer->y * data->game.block_size;
 	}
-	player->key_down = false;
-	player->key_up = false;
-	player->key_left = false;
-	player->key_right = false;
-	player->turn_left = false;
-	player->turn_right = false;
+	init_keys(player);
 	if (data->layer->dir == 'N')
 		player->angle = 3 * PI / 2;
 	else if (data->layer->dir == 'S')
