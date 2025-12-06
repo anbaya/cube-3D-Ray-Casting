@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#pragma once
 
 # include "get_next_line.h"
 # include "libft.h"
@@ -68,6 +67,9 @@ typedef struct s_config
 	int		c_i;
 	int		f_rgb[3];
 	int		c_rgb[3];
+	t_textures	*textures;
+	t_colors	*colors;
+	p_player	*player;
 }			t_config;
 
 // reading / loading
@@ -114,5 +116,3 @@ t_textures	*bridge_textures(t_config *config);
 t_colors	*bridge_colors(t_config *config);
 p_player	*bridge_player(t_config *config);
 void		free_config(t_config *config);
-
-#endif // CUBE_H

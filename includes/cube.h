@@ -14,10 +14,6 @@
 
 #define WIDTH 960
 #define HIGHT 640
-#define MAP_NUM_ROWS 10
-#define MAP_NUM_COLS 14
-#define CELLING_COLOR 0x87CEEB
-#define FLOOR_COLOR 0x228B22
 
 #define A 97
 #define S 115
@@ -115,6 +111,9 @@ typedef struct s_data
 }			t_data;
 
 
+// Main game function
+int cube(t_config *config);
+
 // Player functions
 void			init_player(t_player *player, t_data *data);
 void			move_player(t_player *player, t_cube *game, t_data *data);
@@ -130,7 +129,7 @@ int				key_press(int keycode, t_player *player);
 int				key_release(int keycode, t_player *player);
 
 // Game initialization and loop
-int				init_game(t_data *data, char **map);
+int				init_game(t_data *data, t_config *config);
 int				rgb_to_int(int r, int g, int b);
 int				draw_loop(t_data *data);
 char			**get_map(void);

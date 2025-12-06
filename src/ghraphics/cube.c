@@ -12,15 +12,14 @@
 
 #include "../../includes/cube.h"
 
-int	cube(char **map, t_textures *textures,
-		t_colors *colors, p_player *player)
+int	cube(t_config *config)
 {
 	t_data	data;
 
-	data.colors = colors;
-	data.textures = textures;
-	data.layer = player;
-	init_game(&data, map);
+	data.colors = config->colors;
+	data.textures = config->textures;
+	data.layer = config->player;
+	init_game(&data, config);
 	mlx_hook(data.game.win, 2, 1L << 0, key_press, &data.game.player);
 	mlx_hook(data.game.win, 3, 1L << 1, key_release, &data.game.player);
 	mlx_loop_hook(data.game.mlx, draw_loop, &data);

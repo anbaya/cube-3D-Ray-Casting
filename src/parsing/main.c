@@ -58,8 +58,8 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nInvalid map characters\n", 2);
 		return (1);
 	}
-	textures = bridge_textures(config);
-	colors = bridge_colors(config);
-	player = bridge_player(config);
-	return (cube(config->map, textures, colors, player));
+	config->textures = bridge_textures(config);
+	config->colors = bridge_colors(config);
+	config->player = bridge_player(config);
+	return (cube(config));
 }

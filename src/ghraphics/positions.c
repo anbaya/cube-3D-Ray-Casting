@@ -28,7 +28,7 @@ float	fix_angle(t_player *player, p_player *layer)
 {
 	float	angle_speed;
 
-	angle_speed = 0.02;
+	angle_speed = 0.03;
 	if (player->turn_left)
 		player->angle -= angle_speed;
 	if (player->turn_right)

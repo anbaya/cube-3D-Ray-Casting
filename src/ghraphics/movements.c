@@ -18,7 +18,7 @@ void	key_up(t_player *player, t_cube *game)
 	float	new_x;
 	float	new_y;
 
-	speed = 2;
+	speed = 10;
 	new_x = player->x + cos(player->angle) * speed;
 	new_y = player->y + sin(player->angle) * speed;
 	if (is_valid_position(new_x, new_y, game))
@@ -34,7 +34,7 @@ void	key_down(t_player *player, t_cube *game)
 	float	new_x;
 	float	new_y;
 
-	speed = 2;
+	speed = 10;
 	new_x = player->x - cos(player->angle) * speed;
 	new_y = player->y - sin(player->angle) * speed;
 	if (is_valid_position(new_x, new_y, game))
@@ -50,7 +50,7 @@ void	key_left(t_player *player, t_cube *game)
 	float	new_x;
 	float	new_y;
 
-	speed = 2;
+	speed = 10;
 	new_x = player->x + sin(player->angle) * speed;
 	new_y = player->y - cos(player->angle) * speed;
 	if (is_valid_position(new_x, new_y, game))
@@ -66,7 +66,7 @@ void	key_right(t_player *player, t_cube *game)
 	float	new_x;
 	float	new_y;
 
-	speed = 2;
+	speed = 10;
 	new_x = player->x - sin(player->angle) * speed;
 	new_y = player->y + cos(player->angle) * speed;
 	if (is_valid_position(new_x, new_y, game))

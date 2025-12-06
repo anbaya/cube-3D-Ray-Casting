@@ -87,14 +87,13 @@ int	draw_loop(t_data *data)
 	return (0);
 }
 
-int	init_game(t_data *data, char **map)
+int	init_game(t_data *data, t_config *config)
 {
 	t_player	*player;
 
-	data->game.block_size = compute_block_size(WIDTH, HIGHT, MAP_NUM_COLS,
-			MAP_NUM_ROWS);
+	data->game.block_size = 128;
 	init_player(&data->game.player, data);
-	data->game.map = map;
+	data->game.map = config->map;
 	data->game.floor_color = rgb_to_int(data->colors->floor[0],
 			data->colors->floor[1], data->colors->floor[2]);
 	data->game.ceiling_color = rgb_to_int(data->colors->ceiling[0],
