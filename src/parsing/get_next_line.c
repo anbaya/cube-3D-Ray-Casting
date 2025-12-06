@@ -84,6 +84,12 @@ char	*get_next_line(int fd)
 	static char	*sv;
 	ssize_t		reader_return;
 
+	if (fd < 0)
+	{
+		if (sv)
+			free(sv);
+		return (sv = NULL, NULL);
+	}
 	if (!sv)
 	{
 		sv = malloc(1);

@@ -26,7 +26,6 @@ typedef struct textures
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	**map;
 }	t_textures;
 
 typedef struct s_player
@@ -72,6 +71,9 @@ typedef struct s_config
 	p_player	*player;
 }			t_config;
 
+// cube main
+int			cube(t_config *config);
+
 // reading / loading
 char		**read_file(char *filename);
 int			file_loader(char **file, t_config *config);
@@ -115,4 +117,3 @@ int			fname_check(char *fname);
 t_textures	*bridge_textures(t_config *config);
 t_colors	*bridge_colors(t_config *config);
 p_player	*bridge_player(t_config *config);
-void		free_config(t_config *config);

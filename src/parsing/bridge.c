@@ -23,7 +23,6 @@ t_textures	*bridge_textures(t_config *config)
 	textures->so = config->so_path;
 	textures->we = config->we_path;
 	textures->ea = config->ea_path;
-	textures->map = config->map;
 	return (textures);
 }
 

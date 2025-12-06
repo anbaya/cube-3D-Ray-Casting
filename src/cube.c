@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube.h"
+#include "../includes/cube.h"
 
 int	cube(t_config *config)
 {
@@ -19,9 +19,11 @@ int	cube(t_config *config)
 	data.colors = config->colors;
 	data.textures = config->textures;
 	data.layer = config->player;
+	data.config = config;
 	init_game(&data, config);
-	mlx_hook(data.game.win, 2, 1L << 0, key_press, &data.game.player);
-	mlx_hook(data.game.win, 3, 1L << 1, key_release, &data.game.player);
+	mlx_hook(data.game.win, 17, 0, close_window, &data);
+	mlx_hook(data.game.win, 2, 1L << 0, key_press, &data);
+	mlx_hook(data.game.win, 3, 1L << 1, key_release, &data);
 	mlx_loop_hook(data.game.mlx, draw_loop, &data);
 	mlx_loop(data.game.mlx);
 	return (0);

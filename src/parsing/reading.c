@@ -52,7 +52,7 @@ char	**read_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	file = (char **)malloc(line_count * sizeof(char *));
+	file = (char **)malloc((line_count + 1) * sizeof(char *));
 	if (!file)
 		return (close(fd), NULL);
 	i = 0;
@@ -62,6 +62,7 @@ char	**read_file(char *filename)
 		i++;
 	}
 	file[i] = NULL;
+	get_next_line(-1);
 	close(fd);
 	return (file);
 }

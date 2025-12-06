@@ -108,6 +108,7 @@ typedef struct s_data
     t_textures  *textures;
     t_player    *player;
     p_player    *layer;
+	t_config	*config;
 }			t_data;
 
 
@@ -125,8 +126,8 @@ float			fix_angle(t_player *player, p_player *layer);
 bool			is_valid_position(float x, float y, t_cube *game);
 
 // Key hooks
-int				key_press(int keycode, t_player *player);
-int				key_release(int keycode, t_player *player);
+int				key_press(int keycode, t_data *data);
+int				key_release(int keycode, t_data *data);
 
 // Game initialization and loop
 int				init_game(t_data *data, t_config *config);
@@ -150,3 +151,7 @@ void			draw_floor_and_ceiling(t_cube *game);
 void			put_pixel(int x, int y, int color, t_cube *game);
 int				get_color(t_cube *game, t_ray *ray, float line_height,
 					float pixel_pos);
+
+// Cleanup
+void			free_data(t_data *data);
+int				close_window(t_data *data);

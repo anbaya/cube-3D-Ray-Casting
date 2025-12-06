@@ -12,38 +12,45 @@
 
 #include "../../includes/cube.h"
 
-int	key_press(int keycode, t_player *player)
+int	close_window(t_data *data)
 {
-	if (keycode == W)
-		player->key_up = true;
-	if (keycode == S)
-		player->key_down = true;
-	if (keycode == A)
-		player->key_left = true;
-	if (keycode == D)
-		player->key_right = true;
-	if (keycode == LEFT)
-		player->turn_left = true;
-	if (keycode == RIGHT)
-		player->turn_right = true;
+	free_data(data);
+	exit(0);
 	return (0);
 }
 
-int	key_release(int keycode, t_player *player)
+int	key_press(int keycode, t_data *data)
 {
 	if (keycode == W)
-		player->key_up = false;
+		data->game.player.key_up = true;
 	if (keycode == S)
-		player->key_down = false;
+		data->game.player.key_down = true;
 	if (keycode == A)
-		player->key_left = false;
+		data->game.player.key_left = true;
 	if (keycode == D)
-		player->key_right = false;
+		data->game.player.key_right = true;
 	if (keycode == LEFT)
-		player->turn_left = false;
+		data->game.player.turn_left = true;
 	if (keycode == RIGHT)
-		player->turn_right = false;
+		data->game.player.turn_right = true;
+	return (0);
+}
+
+int	key_release(int keycode, t_data *data)
+{
+	if (keycode == W)
+		data->game.player.key_up = false;
+	if (keycode == S)
+		data->game.player.key_down = false;
+	if (keycode == A)
+		data->game.player.key_left = false;
+	if (keycode == D)
+		data->game.player.key_right = false;
+	if (keycode == LEFT)
+		data->game.player.turn_left = false;
+	if (keycode == RIGHT)
+		data->game.player.turn_right = false;
 	if (keycode == ESC)
-		exit(0);
+		close_window(data);
 	return (0);
 }
