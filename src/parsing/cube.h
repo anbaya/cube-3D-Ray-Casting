@@ -14,7 +14,7 @@
 
 #include "get_next_line.h"
 #include "libft.h"
-#include "mlx.h"
+#include "../../includes/mlx/mlx.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,6 +83,8 @@ int				load_colors(char **file, t_config *config);
 char			**map_dup(t_config *config);
 int				parse_file(char **file, t_config *config);
 int				get_player(t_config *config, char **map);
+int				player_position_check(int x, int y, t_config *config);
+int				is_in_borther(int x, int y, char **map);
 int				init_and_cleanup(int fd, char **sv);
 
 // texture helpers
@@ -121,3 +123,6 @@ int				fname_check(char *fname);
 t_textures		*bridge_textures(t_config *config);
 t_colors		*bridge_colors(t_config *config);
 t_layer			*bridge_player(t_config *config);
+
+// memory management
+void			free_config(t_config *config);

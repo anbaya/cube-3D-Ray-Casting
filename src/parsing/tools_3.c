@@ -28,6 +28,8 @@ int	get_player(t_config *config, char **map)
 			{
 				config->p_x = j;
 				config->p_y = i;
+				if (player_position_check(j, i, config))
+					return (0);
 				config->p_dir = map[i][j];
 				return (1);
 			}
