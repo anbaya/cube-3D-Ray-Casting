@@ -16,28 +16,29 @@ int	get_player(t_config *config, char **map)
 {
 	int	i;
 	int	j;
+	int found;
 
-	i = 0;
-	while (map[i])
+	i = -1;
+	found = 0;
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
+			if (is_player_char(map[i][j]))
 			{
+				if (player_position_check(j, i, config) || found == 1)
+					return (0);
 				config->p_x = j;
 				config->p_y = i;
-				if (player_position_check(j, i, config))
-					return (0);
 				config->p_dir = map[i][j];
-				return (1);
+				found = 1;
 			}
-			j++;
 		}
-		i++;
 	}
-	return (0);
+	if (found == 0)
+		return (0);
+	return (1);
 }
 
 int	index_check(t_config *config, int i)

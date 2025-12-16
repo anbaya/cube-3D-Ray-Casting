@@ -86,6 +86,7 @@ int				get_player(t_config *config, char **map);
 int				player_position_check(int x, int y, t_config *config);
 int				is_in_borther(int x, int y, char **map);
 int				init_and_cleanup(int fd, char **sv);
+int				is_player_char(char c);
 
 // texture helpers
 int				is_map(char *line);

@@ -22,8 +22,9 @@ int	map_parsing(t_config *config, int i, int j)
 {
 	static int	space;
 
-	if (i < 0 || j < 0 || i > config->num_rows
-		|| j > (int)ft_strlen(config->nap[i]))
+	if (i < 0 || j < 0 || i >= config->num_rows)
+		return (0);
+	if (j >= (int)ft_strlen(config->nap[i]))
 		return (0);
 	if (config->nap[i][j] == '1' || config->nap[i][j] == '@')
 		return (0);

@@ -32,3 +32,8 @@ int	player_position_check(int x, int y, t_config *config)
 		return (1);
 	return (0);
 }
+
+int is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
