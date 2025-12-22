@@ -16,7 +16,7 @@ int	get_player(t_config *config, char **map)
 {
 	int	i;
 	int	j;
-	int found;
+	int	found;
 
 	i = -1;
 	found = 0;

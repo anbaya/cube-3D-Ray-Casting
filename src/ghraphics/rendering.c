@@ -48,9 +48,9 @@ int	get_color(t_cube *game, t_ray *ray, float line_height, float pixel_pos)
 
 	texture = &game->textures[ray->wall_side];
 	if (ray->wall_side == NORTH || ray->wall_side == SOUTH)
-		wall_x = ray->x; // For horizontal walls, use X position
+		wall_x = ray->x;
 	else
-		wall_x = ray->y; // For vertical walls, use Y position
+		wall_x = ray->y;
 	wall_x = fmod(wall_x, (float)game->block_size);
 	if (wall_x < 0)
 		wall_x += game->block_size;

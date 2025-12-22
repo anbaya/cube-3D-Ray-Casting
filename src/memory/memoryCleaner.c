@@ -69,6 +69,8 @@ void	free_config_tow(t_config *config)
 
 void	free_config(t_config *config)
 {
+	if (!config)
+		return ;
 	if (config->file)
 		free_map(config->file);
 	if (config->map)

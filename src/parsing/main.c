@@ -23,9 +23,9 @@ t_config	*init_config(char *filename)
 	config->mlx = mlx_init();
 	config->file = read_file(filename);
 	if (!config->file)
-		return (free(config), NULL);
+		return (free_config(config), NULL);
 	if (!file_loader(config->file, config))
-		return (free(config->file), free(config), NULL);
+		return (free_config(config), NULL);
 	return (config);
 }
 
