@@ -73,7 +73,7 @@ int	draw_loop(t_data *data)
 	data->game.img_start = mlx_get_data_addr(data->game.img,
 			&data->game.bpp, &data->game.size_line,
 			&data->game.endian);
-	move_player(player, &data->game, data);
+	move_player(player, &data->game);
 	fraction = PI / 3 / WIDTH;
 	start_x = player->angle - (PI / 6);
 	i = 0;
@@ -91,8 +91,6 @@ int	draw_loop(t_data *data)
 
 int	init_game(t_data *data, t_config *config)
 {
-	t_player	*player;
-
 	data->game.block_size = 128;
 	init_player(&data->game.player, data);
 	data->game.map = config->map;

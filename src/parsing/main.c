@@ -32,11 +32,8 @@ t_config	*init_config(char *filename)
 int	main(int argc, char **argv)
 {
 	t_config	*config;
-	t_textures	*textures;
-	t_colors	*colors;
-	t_layer		*player;
 
-	if (!fname_check(argv[1]) || argc != 2)
+	if (argc != 2 || !fname_check(argv[1]))
 		return (ft_putstr_fd("Error\nInvalid file or argument\n", 2), 1);
 	config = init_config(argv[1]);
 	if (!config)

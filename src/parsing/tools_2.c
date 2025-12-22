@@ -52,19 +52,6 @@ static int	process_digit(char *line, int *i, char *num, int *j)
 	return (1);
 }
 
-static int	process_comma(char *line, int *i, char *num, int *j)
-{
-	int	*comma_count;
-
-	comma_count = (int *)((char *)j + sizeof(int));
-	if (*comma_count >= 2)
-		return (0);
-	num[(*j)++] = ',';
-	(*comma_count)++;
-	(*i)++;
-	return (1);
-}
-
 int	parse_color_values(char *line, int i, char *num, int *comma_count)
 {
 	int	j;

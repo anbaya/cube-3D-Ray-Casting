@@ -115,12 +115,12 @@ int				cube(t_config *config);
 
 // Player functions
 void			init_player(t_player *player, t_data *data);
-void			move_player(t_player *player, t_cube *game, t_data *data);
+void			move_player(t_player *player, t_cube *game);
 void			key_up(t_player *player, t_cube *game);
 void			key_down(t_player *player, t_cube *game);
 void			key_left(t_player *player, t_cube *game);
 void			key_right(t_player *player, t_cube *game);
-float			fix_angle(t_player *player, t_layer *layer);
+float			fix_angle(t_player *player);
 bool			is_valid_position(float x, float y, t_cube *game);
 
 // Key hooks
@@ -136,7 +136,7 @@ void			init_textures(t_cube *game, t_textures *txt);
 
 // Raycasting
 void			cast_ray(t_player *player, t_ray *ray, t_cube *game);
-bool			touch(float px, float py, t_cube *game, t_wall_side *wall_side);
+bool			touch(float px, float py, t_cube *game);
 void			determine_wall_side(t_position *current, t_position *prev,
 					t_wall_side *wall_side, t_cube *game);
 float			distance(float dx, float dy);

@@ -34,7 +34,7 @@ void	determine_wall_side(t_position *current, t_position *prev,
 		*wall_side = NORTH;
 }
 
-bool	touch(float px, float py, t_cube *game, t_wall_side *wall_side)
+bool	touch(float px, float py, t_cube *game)
 {
 	int	x;
 	int	y;
@@ -80,7 +80,7 @@ void	cast_ray(t_player *player, t_ray *ray, t_cube *game)
 		prev.y = ray->y;
 		ray->x += cos(ray->angle);
 		ray->y += sin(ray->angle);
-		if (touch(ray->x, ray->y, game, &ray->wall_side))
+		if (touch(ray->x, ray->y, game))
 		{
 			current.x = ray->x;
 			current.y = ray->y;

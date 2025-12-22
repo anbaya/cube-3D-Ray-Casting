@@ -76,14 +76,14 @@ void	key_right(t_player *player, t_cube *game)
 	}
 }
 
-void	move_player(t_player *player, t_cube *game, t_data *data)
+void	move_player(t_player *player, t_cube *game)
 {
 	float	cos_angle;
 	float	sin_angle;
 
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
-	fix_angle(player, data->layer);
+	fix_angle(player);
 	if (player->key_up)
 		key_up(player, game);
 	if (player->key_down)
