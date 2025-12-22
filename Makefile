@@ -13,7 +13,7 @@ SRC = src/cube.c src/ghraphics/player.c src/ghraphics/movements.c src/ghraphics/
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -g $(SRC) -o $(NAME) $(LIBFT) $(INCLUDES) $(LFLAGS)
+	$(CC) $(SRC) -o $(NAME) $(LIBFT) $(INCLUDES) $(LFLAGS)
 clean:
 	rm -rf $(OBJ)
 fclean:
