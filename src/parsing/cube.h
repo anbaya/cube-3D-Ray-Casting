@@ -6,7 +6,7 @@
 /*   By: anoir <anoir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:08:44 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/14 20:54:42 by anoir            ###   ########.fr       */
+/*   Updated: 2025/12/24 11:10:25 by anoir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				player_position_check(int x, int y, t_config *config);
 int				is_in_borther(int x, int y, char **map);
 int				init_and_cleanup(int fd, char **sv);
 int				is_player_char(char c);
+int				holes_in_map(char **map, t_config *config);
 
 // texture helpers
 int				is_map(char *line);

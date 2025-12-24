@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoir <anoir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:30:23 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/04 17:43:39 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/24 11:01:05 by anoir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ void	key_right(t_player *player, t_cube *game)
 
 void	move_player(t_player *player, t_cube *game)
 {
-	float	cos_angle;
-	float	sin_angle;
-
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
 	fix_angle(player);
 	if (player->key_up)
 		key_up(player, game);

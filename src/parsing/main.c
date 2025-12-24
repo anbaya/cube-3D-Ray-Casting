@@ -6,7 +6,7 @@
 /*   By: anoir <anoir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:08:39 by anbaya            #+#    #+#             */
-/*   Updated: 2025/12/14 20:58:35 by anoir            ###   ########.fr       */
+/*   Updated: 2025/12/24 11:28:44 by anoir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ int	main(int argc, char **argv)
 	if (!get_player(config, config->map))
 		return (free_config(config),
 			ft_putstr_fd("Error\nNo player or bad player position\n", 2), 1);
-	if (map_parsing(config, config->p_x, config->p_y))
-		return (free_config(config),
-			ft_putstr_fd("Error\nInvalid map\n", 2), 1);
 	if (map_char_check(config->map))
 		return (free_config(config),
 			ft_putstr_fd("Error\nInvalid map characters\n", 2), 1);

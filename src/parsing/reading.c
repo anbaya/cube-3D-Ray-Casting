@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anoir <anoir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:08:28 by anbaya            #+#    #+#             */
-/*   Updated: 2025/10/30 11:32:33 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/12/24 11:10:01 by anoir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int	file_loader(char **file, t_config *config)
 	config->num_rows = i;
 	config->nap = map_dup(config);
 	if (!config->nap)
+		return (0);
+	if (holes_in_map(config->map, config))
 		return (0);
 	if (load_textures(file, config) == -1)
 		return (0);

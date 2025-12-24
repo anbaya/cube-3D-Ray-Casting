@@ -6,7 +6,7 @@
 /*   By: anoir <anoir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:50:46 by anoir             #+#    #+#             */
-/*   Updated: 2025/12/14 20:53:24 by anoir            ###   ########.fr       */
+/*   Updated: 2025/12/24 11:33:12 by anoir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,31 @@ int	player_position_check(int x, int y, t_config *config)
 int	is_player_char(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+int	is_valid_char(char c)
+{
+	return (c == '0' || c == '1' || is_player_char(c));
+}
+
+int	holes_in_map(char **map, t_config *config)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < config->num_rows)
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == '0' && (!is_valid_char(map[y][x + 1])
+			|| !is_valid_char(map[y][x - 1]) || !is_valid_char(map[y + 1][x])
+			|| !is_valid_char(map[y - 1][x])))
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }
