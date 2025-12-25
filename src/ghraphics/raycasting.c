@@ -25,13 +25,13 @@ void	determine_wall_side(t_position *current, t_position *prev,
 	prev_grid_x = prev->x / game->block_size;
 	prev_grid_y = prev->y / game->block_size;
 	if (prev_grid_x != x && current->x < prev->x)
-		*wall_side = EAST;
-	else if (prev_grid_x != x && current->x > prev->x)
 		*wall_side = WEST;
+	else if (prev_grid_x != x && current->x > prev->x)
+		*wall_side = EAST;
 	else if (prev_grid_y != y && current->y < prev->y)
-		*wall_side = SOUTH;
-	else if (prev_grid_y != y && current->y > prev->y)
 		*wall_side = NORTH;
+	else if (prev_grid_y != y && current->y > prev->y)
+		*wall_side = SOUTH;
 }
 
 bool	touch(float px, float py, t_cube *game)
